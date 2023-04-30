@@ -18,7 +18,7 @@ class Beverage(models.Model):
 
     def enough_price(self, to_check: float) -> bool:
         return to_check >= self.price
-    
+
     def available(self) -> bool:
         return self.stock > 0
 

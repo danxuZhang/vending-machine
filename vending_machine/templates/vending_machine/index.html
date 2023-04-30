@@ -3,19 +3,19 @@
 {% block content %}
 
 <nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Vending Machine</a>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">History</a>
-        </li>
-      </ul>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Vending Machine</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">History</a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
 
 <br>
@@ -64,26 +64,26 @@
 <div id="inventory">
     <h1 class="text-center">Inventory</h1>
     <div class="mx-5">
-    {% for beverage in beverages %}
-    <div class="col">
-        <div class="card rounded-3">
-            <div class="card-header">{{beverage.name}}</div>
-            <div class="card-body">
-                Price: ${{beverage.price}}
-                <br>
-                {% if beverage.available %}
-                Status: Available
-                {% else %}
-                Status: Out of Stock
-                {% endif %}
-                <br>
-                {% if balance >= beverage.price %}
-                Purchase
-                {% endif %}
+        {% for beverage in beverages %}
+        <div class="col">
+            <div class="card rounded-3">
+                <div class="card-header">{{beverage.name}}</div>
+                <div class="card-body">
+                    Price: ${{beverage.price}}
+                    <br>
+                    {% if beverage.available %}
+                    Status: Available
+                    {% else %}
+                    Status: Out of Stock
+                    {% endif %}
+                    <br>
+                    {% if balance >= beverage.price %}
+                    Purchase
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
     </div>
 </div>
 
