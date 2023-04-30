@@ -43,7 +43,7 @@ def flush(request: HttpRequest):
 
 
 def purchase(request: HttpRequest):
-    try: 
+    try:
         assert request.method == "POST", "not a post request"
         item_id = request.POST['id']
         beverage = get_object_or_404(Beverage, pk=item_id)
@@ -51,7 +51,7 @@ def purchase(request: HttpRequest):
         return_amount = inserted_amount - beverage.price
         assert return_amount >= 0, "insufficient amount"
         transaction = Transaction(beverage=beverage, inserted_amount=inserted_amount, return_amount=return_amount,
-                                  trans_time = timezone.now())
+                                  trans_time=timezone.now())
         # print(f"Success: {beverage}, inserted: {inserted_amount}, time: {timezone.now()}")
         beverage.decrement_stock()
         beverage.save()
@@ -61,11 +61,11 @@ def purchase(request: HttpRequest):
         print(msg)
     finally:
         return HttpResponseRedirect(reverse('vendingmachine:index'))
-    
+
 
 def history(request: HttpRequest):
     transactions = Transaction.objects.all()
     context = {
-        'transactions' : transactions,
+        'transactions': transactions,
     }
     return render(request, 'vending_machine/history.html', context=context)
