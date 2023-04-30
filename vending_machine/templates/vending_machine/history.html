@@ -1,0 +1,34 @@
+{% extends "vending_machine/base.html" %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Vending Machine</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'vendingmachine:index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">History</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ol class="list-group list-group-numbered">
+    {% for transaction in transactions %}
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+            <div class="fw-bold">{{transaction.beverage.name}}</div>
+            Inserted Amount: ${{transaction.inserted_amount}} <br>
+            Returned Amount: ${{transaction.return_amount}} <br>
+            Transaction Time: {{transaction.trans_time}} <br>
+        </div>
+    </li>
+    {% endfor %}
+</ol>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+@startuml Vending Machine
+
+class Beverage {
+    id : int
+    price : float
+    stock : int
+}
+
+class Transaction {
+    beverage_id : int
+    inserted_amount : float
+    return_amount : float
+    time : DateTime
+}
+
+Transaction -- Beverage
+
+@enduml
