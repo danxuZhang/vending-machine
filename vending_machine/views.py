@@ -54,7 +54,7 @@ def purchase(request: HttpRequest):
                                   trans_time = timezone.now())
         # print(f"Success: {beverage}, inserted: {inserted_amount}, time: {timezone.now()}")
         beverage.decrement_stock()
-        # beverage.save()
+        beverage.save()
         transaction.save()
         request.session['balance'] = return_amount
     except AssertionError as msg:
