@@ -11,7 +11,7 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">History</a>
+                    <a class="nav-link" href="{% url 'vendingmachine:history' %}">History</a>
                 </li>
             </ul>
         </div>
@@ -77,8 +77,14 @@
                     Status: Out of Stock
                     {% endif %}
                     <br>
-                    {% if balance >= beverage.price %}
-                    Purchase
+                    {% if balance >= beverage.price and beverage.available %}
+                    <form action="{% url 'vendingmachine:purchase' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{beverage.id}}">
+                        <button type="submit" class="btn btn-primary">Purchase</button>
+                    </form>
+                    {% else %}
+                    <div class="btn btn-secondary">Purchase</div>
                     {% endif %}
                 </div>
             </div>
