@@ -1,0 +1,91 @@
+{% extends "vending_machine/base.html" %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Vending Machine</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">History</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<br>
+
+<div class="Balance">
+    <div class="border border-dark rounded mx-5 ">
+        <div class="h4 text-center">Current balance: ${{balance}}</div>
+        <div class="text-center">
+            <span class="h5">Top Up: </span>
+        </div>
+        <div class="row my-4 mx-auto" style="width: 50%; align-content: center;">
+            <div class="col">
+                <form action="{% url 'vendingmachine:add' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="amount" value="2.00">
+                    <button type="submit" class="btn btn-primary"> $2.00</button>
+                </form>
+            </div>
+            <div class="col">
+                <form action="{% url 'vendingmachine:add' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="amount" value="5.00">
+                    <button type="submit" class="btn btn-primary"> $5.00</button>
+                </form>
+            </div>
+            <div class="col">
+                <form action="{% url 'vendingmachine:add' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="amount" value="10.00">
+                    <button type="submit" class="btn btn-primary">$10.00</button>
+                </form>
+            </div>
+            <div class="col">
+                <form action="{% url 'vendingmachine:flush' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="flush" value="True">
+                    <button type="submit" class="btn btn-danger">Reset</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div id="inventory">
+    <h1 class="text-center">Inventory</h1>
+    <div class="mx-5">
+    {% for beverage in beverages %}
+    <div class="col">
+        <div class="card rounded-3">
+            <div class="card-header">{{beverage.name}}</div>
+            <div class="card-body">
+                Price: ${{beverage.price}}
+                <br>
+                {% if beverage.available %}
+                Status: Available
+                {% else %}
+                Status: Out of Stock
+                {% endif %}
+                <br>
+                {% if balance >= beverage.price %}
+                Purchase
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
