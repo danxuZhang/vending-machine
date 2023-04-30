@@ -21,6 +21,9 @@ class Beverage(models.Model):
 
     def available(self) -> bool:
         return self.stock > 0
+    
+    def getImageURL(self):
+        return self.name.replace(" ", "")
 
     def __str__(self) -> str:
         return f"{self.name}(${self.price}, {self.stock})"

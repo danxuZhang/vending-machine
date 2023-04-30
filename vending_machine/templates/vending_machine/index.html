@@ -67,6 +67,10 @@
         {% for beverage in beverages %}
         <div class="col">
             <div class="card rounded-3">
+                {% load static %}
+                {% with 'vending_machine/'|add:beverage.getImageURL|add:'.png' as img_static %}
+                <img class="card-img" src="{% static img_static %}" alt="{{beverage.name}}" style="height: 100%"/>
+                {% endwith %}
                 <div class="card-header">{{beverage.name}}</div>
                 <div class="card-body">
                     Price: ${{beverage.price}}
