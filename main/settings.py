@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'vending_machine.apps.VendingMachineConfig'
+    'rest_framework',
+    'vending_machine.apps.VendingMachineConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
